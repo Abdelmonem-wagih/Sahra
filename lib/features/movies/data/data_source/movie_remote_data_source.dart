@@ -36,7 +36,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDatasource {
           errorMessageModel: ErrorMessageModel.fromJason(response.data));
     }
   }
-
+  
   @override
   Future<List<MovieModel>> getPopularMovies() async {
     final response = await Dio().get(AppConstance.popularMoviesPath);

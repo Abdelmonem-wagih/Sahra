@@ -2,7 +2,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:flutter/material.dart';
 import 'package:sahar/core/unit/app_constance.dart';
 import 'package:sahar/features/movies/presentation/cubit/now_playing_movies/now_playing_movies_cubit.dart';
@@ -14,8 +13,6 @@ class NowPlayingComponent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NowPlayingMoviesCubit, NowPlayingState>(
-      //build the widet when the old data not the same new data
-
       builder: (context, state) {
         if (state is NowPlayingInitial) {
           return const SizedBox(

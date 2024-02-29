@@ -6,7 +6,7 @@ import 'package:sahar/core/unit/app_constance.dart';
 import 'package:sahar/core/unit/app_string.dart';
 import 'package:sahar/features/movies/presentation/component/recommendations_component.dart';
 import 'package:sahar/features/movies/presentation/cubit/movie_details/movies_details_cubit.dart';
-import 'package:sahar/features/movies/presentation/screens/movies_screen.dart';
+import 'package:sahar/home_screen.dart';
 import '../../domain/entities/genres.dart';
 
 class MovieDetailScreen extends StatelessWidget {
@@ -33,7 +33,7 @@ class MovieDetailScreen extends StatelessWidget {
                     icon: const Icon(Icons.arrow_back_ios_new_rounded),
                     onPressed: () => Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => const MoviesScreen()),
+                      MaterialPageRoute(builder: (context) =>  HomeScreen(currentPageIndex: 0,)),
                     ),
                   ),
                   pinned: true,
