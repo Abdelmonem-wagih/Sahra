@@ -4,10 +4,11 @@ import 'package:sahar/core/network/error_message_model.dart';
 import 'package:sahar/core/unit/app_constance.dart';
 import 'package:sahar/features/movies/data/models/movie_details_model.dart';
 import 'package:sahar/features/movies/data/models/movie_model.dart';
+import 'package:sahar/features/movies/data/models/movie_videos_model.dart';
 import 'package:sahar/features/movies/data/models/recommendation_model.dart';
 import 'package:sahar/features/movies/domain/usecase/get_movie_details_usecase.dart';
+import 'package:sahar/features/movies/domain/usecase/get_movie_videos_usecase.dart';
 import 'package:sahar/features/movies/domain/usecase/get_recommendation_usecase.dart';
-
 
 abstract class BaseMovieRemoteDatasource {
   Future<List<MovieModel>> getNowPlayingMovies();
@@ -19,7 +20,9 @@ abstract class BaseMovieRemoteDatasource {
   Future<MovieDetailsModel> getMovieDetails(MovieDetailsParameter parameter);
 
   Future<List<RecommendationModel>> getRecommendation(
-      RecommendationParameters parameter);
+    RecommendationParameters parameter,
+  );
+  Future<List<MovieVideosModel>> getMovieVideos(MovieVideosParameter parameter);
 }
 
 class MovieRemoteDataSource extends BaseMovieRemoteDatasource {
@@ -36,7 +39,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDatasource {
           errorMessageModel: ErrorMessageModel.fromJason(response.data));
     }
   }
-  
+
   @override
   Future<List<MovieModel>> getPopularMovies() async {
     final response = await Dio().get(AppConstance.popularMoviesPath);
@@ -65,7 +68,7 @@ class MovieRemoteDataSource extends BaseMovieRemoteDatasource {
   Future<MovieDetailsModel> getMovieDetails(
       MovieDetailsParameter parameter) async {
     final response =
-    await Dio().get(AppConstance.movieDetailsPath(parameter.movieId));
+        await Dio().get(AppConstance.movieDetailsPath(parameter.movieId));
     if (response.statusCode == 200) {
       return MovieDetailsModel.fromJson(response.data);
     } else {
@@ -78,13 +81,30 @@ class MovieRemoteDataSource extends BaseMovieRemoteDatasource {
   Future<List<RecommendationModel>> getRecommendation(
       RecommendationParameters parameter) async {
     final response =
-    await Dio().get(AppConstance.recommendationPath(parameter.id));
+        await Dio().get(AppConstance.recommendationPath(parameter.id));
     if (response.statusCode == 200) {
       return List<RecommendationModel>.from((response.data["results"] as List)
           .map((e) => RecommendationModel.fromJson(e)));
     } else {
       throw ServerException(
           errorMessageModel: ErrorMessageModel.fromJason(response.data));
+    }
+  }
+
+  @override
+  Future<List<MovieVideosModel>> getMovieVideos(
+      MovieVideosParameter parameter) async {
+    final response = await dio.get(AppConstance.movieVideos(parameter.moiveId));
+    if (response.statusCode == 200) {
+      return List<MovieVideosModel>.from(
+        ((response.data['results'] ?? []) as List).map(
+          (e) => MovieVideosModel.fromJson(e),
+        ),
+      );
+    } else {
+      throw ServerException(
+        errorMessageModel: ErrorMessageModel.fromJason(response.data),
+      );
     }
   }
 }

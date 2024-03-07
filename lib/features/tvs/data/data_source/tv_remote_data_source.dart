@@ -2,9 +2,11 @@ import 'package:dio/dio.dart';
 import 'package:sahar/core/exception/exception.dart';
 import 'package:sahar/core/network/error_message_model.dart';
 import 'package:sahar/core/unit/app_constance.dart';
+import 'package:sahar/features/tvs/data/models/episodes_model.dart';
 import 'package:sahar/features/tvs/data/models/recommendation_tv_model.dart';
 import 'package:sahar/features/tvs/data/models/tv_details_model.dart';
 import 'package:sahar/features/tvs/data/models/tv_model.dart';
+import 'package:sahar/features/tvs/domain/usecase/get_episodes_usecase.dart';
 import 'package:sahar/features/tvs/domain/usecase/get_recommendation_tv_usecase.dart';
 import 'package:sahar/features/tvs/domain/usecase/get_tv_details_usecase.dart';
 
@@ -19,6 +21,8 @@ abstract class BaseTVsRemoteDataSource {
 
   Future<List<RecommendationTVsModel>> getRecommendation(
       RecommendationTVsParameters parameter);
+
+  Future<List<EpisodesModel>> getEpisodes(EpisodesParameters pramater);
 }
 
 class TVsRemoteDataSource extends BaseTVsRemoteDataSource {
@@ -41,7 +45,7 @@ class TVsRemoteDataSource extends BaseTVsRemoteDataSource {
 
   @override
   Future<List<TVsModel>> getPopularTVs() async {
-    final response = await  Dio().get(AppConstance.popularTVsPath);
+    final response = await Dio().get(AppConstance.popularTVsPath);
     if (response.statusCode == 200) {
       return List<TVsModel>.from(
         (response.data['results'] as List).map((e) => TVsModel.fromJson(e)),
@@ -72,7 +76,7 @@ class TVsRemoteDataSource extends BaseTVsRemoteDataSource {
   @override
   Future<TVsDetailsModel> getTVsDetails(TVsDetailsParameter parameter) async {
     final response =
-        await Dio().get(AppConstance.tvDetailsPath(parameter.seriesId));
+        await dio.get(AppConstance.tvDetailsPath(parameter.seriesId));
     if (response.statusCode == 200) {
       return TVsDetailsModel.fromJson(response.data);
     } else {
@@ -84,10 +88,27 @@ class TVsRemoteDataSource extends BaseTVsRemoteDataSource {
 
   @override
   Future<List<TVsModel>> getTopRatedTVs() async {
-    final response = await Dio().get(AppConstance.topRatedTVsPath);
+    final response = await dio.get(AppConstance.topRatedTVsPath);
     if (response.statusCode == 200) {
       return List<TVsModel>.from(
         (response.data["results"] as List).map((e) => TVsModel.fromJson(e)),
+      );
+    } else {
+      throw ServerException(
+        errorMessageModel: ErrorMessageModel.fromJason(response.data),
+      );
+    }
+  }
+
+  @override
+  Future<List<EpisodesModel>> getEpisodes(EpisodesParameters pramater) async {
+    final response = await dio
+        .get(AppConstance.episodes(pramater.seriesId, pramater.seasonNumber));
+    if (response.statusCode == 200) {
+      return List<EpisodesModel>.from(
+        (response.data['episodes'] as List).map(
+          (e) => EpisodesModel.fromJson(e),
+        ),
       );
     } else {
       throw ServerException(

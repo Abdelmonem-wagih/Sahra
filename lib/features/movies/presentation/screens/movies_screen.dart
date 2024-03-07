@@ -7,6 +7,8 @@ import 'package:sahar/features/movies/presentation/component/top_rated_component
 import 'package:sahar/features/movies/presentation/widget/popular_bottom_sheet.dart';
 import 'package:sahar/features/movies/presentation/widget/top_rated_bottom_sheet.dart';
 
+import '../widget/youtube_player.dart';
+
 class MoviesScreen extends StatelessWidget {
   const MoviesScreen({Key? key}) : super(key: key);
 
@@ -51,7 +53,15 @@ class MoviesScreen extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    onTap: () => showSheet(true),
+                    onTap: () => 
+                    // Navigator.of(context).push(
+                    //   MaterialPageRoute(
+                    //     builder: (context) => NewsDetailPage(
+                    //       videoId: 'e1k1PC0TtmE',
+                    //     ),
+                    //   ),
+                    // ),
+                    showSheet(true),
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Row(

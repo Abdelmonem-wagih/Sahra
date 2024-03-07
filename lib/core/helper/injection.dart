@@ -3,11 +3,13 @@ import 'package:sahar/features/movies/data/data_source/movie_remote_data_source.
 import 'package:sahar/features/movies/data/repository/movies_repository.dart';
 import 'package:sahar/features/movies/domain/repository/base_movies_repository.dart';
 import 'package:sahar/features/movies/domain/usecase/get_movie_details_usecase.dart';
+import 'package:sahar/features/movies/domain/usecase/get_movie_videos_usecase.dart';
 import 'package:sahar/features/movies/domain/usecase/get_now_playing_movies_usecase.dart';
 import 'package:sahar/features/movies/domain/usecase/get_popular_movies_usecase.dart';
 import 'package:sahar/features/movies/domain/usecase/get_recommendation_usecase.dart';
 import 'package:sahar/features/movies/domain/usecase/get_toprated_movies_usecase.dart';
 import 'package:sahar/features/movies/presentation/cubit/movie_details/movies_details_cubit.dart';
+import 'package:sahar/features/movies/presentation/cubit/movie_videos/movie_videos_cubit.dart';
 import 'package:sahar/features/movies/presentation/cubit/now_playing_movies/now_playing_movies_cubit.dart';
 import 'package:sahar/features/movies/presentation/cubit/popular_movies/popular_movies_cubit.dart';
 import 'package:sahar/features/movies/presentation/cubit/recommendation/recommendation_cubit.dart';
@@ -39,6 +41,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => TopRatedMoviesCubit(sl()));
   sl.registerLazySingleton(() => MoviesDetailsCubit(sl()));
   sl.registerLazySingleton(() => RecommendationCubit(sl()));
+   sl.registerLazySingleton(() => MovieVideosCubit(sl()));
 
                        ///TVs Cubit///
   sl.registerLazySingleton(() => OnTheAirCubit(sl()));
@@ -55,6 +58,7 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetTopRatedMoviesUseCase(sl()));
   sl.registerLazySingleton(() => GetMovieDetailsUseCase(sl()));
   sl.registerLazySingleton(() => GetRecommendationUseCase(sl()));
+  sl.registerLazySingleton(() => GetMovieVideosUseCase(sl()));
 
                        ///TVs UseCase///
   sl.registerLazySingleton(() => GetOnTheAirUseCase(sl()));

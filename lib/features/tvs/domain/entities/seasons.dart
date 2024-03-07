@@ -5,14 +5,14 @@ class Seasons extends Equatable {
   final int seasonNumber;
   final int? episodeCount;
   final String? airDate;
-  final String? posterPath;
+  final String? name;
 
   Seasons({
+    required this.name,
     required this.id,
     required this.seasonNumber,
     required this.episodeCount,
     required this.airDate,
-    required this.posterPath,
   });
 
   @override
@@ -21,6 +21,6 @@ class Seasons extends Equatable {
         seasonNumber,
         episodeCount,
         airDate,
-        posterPath,
+        name,
       ];
 }

@@ -44,6 +44,10 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_native_splash: ^2.3.13
   curved_navigation_bar: ^1.0.3
+  youtube_player_flutter: ^8.1.2
+  flutter_local_notifications: ^16.3.2
+  device_info_plus: ^9.1.2
+  flutter_timezone: ^1.0.8
 
 flutter_native_splash:
   android: true

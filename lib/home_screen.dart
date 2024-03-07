@@ -71,40 +71,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
         ],
       )
-      //  BottomNavigationBar(
-      //   backgroundColor: Colors.transparent,
-      //   currentIndex: widget.currentPageIndex,
-        
-      //   items: [
-      //     BottomNavigationBarItem(
-      //       tooltip: 'Movie',
-      //       icon: SvgPicture.asset(
-      //         'assets/icons/movie.svg',
-      //         color: Colors.white,
-      //         height: 40,
-      //         width: 40,
-      //       ),
-      //       label: 'Movie',
-      //     ),
-      //     BottomNavigationBarItem(
-      //       tooltip: 'TV',
-      //       icon: SvgPicture.asset(
-      //         'assets/icons/tv.svg',
-      //         color: Colors.white,
-      //         height: 40,
-      //         width: 40,
-      //       ),
-      //       label: 'TV',
-      //     ),
-      //   ],
-      //   onTap: (index) {
-      //     _pageController.animateToPage(
-      //       index,
-      //       duration: Duration(milliseconds: 300),
-      //       curve: Curves.easeInOut,
-      //     );
-      //   },
-      // ),
     );
   }
 }

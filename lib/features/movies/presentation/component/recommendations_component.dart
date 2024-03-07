@@ -28,12 +28,10 @@ class RecommendationsComponent extends StatelessWidget {
         } else if (state is RecommendationLoaded) {
           return SliverPadding(
             padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 24.0),
-            sliver: SliverPadding(
-              padding: const EdgeInsets.all(8.0),
               sliver: SliverGrid(
                 delegate: SliverChildBuilderDelegate(
                   childCount: state.recommendation.length,
-                      (context, index) {
+                  (context, index) {
                     final recommendation = state.recommendation[index];
                     return FadeInUp(
                       from: 20,
@@ -50,7 +48,7 @@ class RecommendationsComponent extends StatelessWidget {
                         },
                         child: ClipRRect(
                           borderRadius:
-                          const BorderRadius.all(Radius.circular(4.0)),
+                              const BorderRadius.all(Radius.circular(4.0)),
                           child: CachedNetworkImage(
                             imageUrl: AppConstance.imageUrl(
                                 recommendation.backdropPath!),
@@ -67,7 +65,7 @@ class RecommendationsComponent extends StatelessWidget {
                               ),
                             ),
                             errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
+                                const Icon(Icons.error),
                             height: 180.0,
                             fit: BoxFit.cover,
                           ),
@@ -84,7 +82,7 @@ class RecommendationsComponent extends StatelessWidget {
                   crossAxisCount: 3,
                 ),
               ),
-            ),
+            
           );
         } else {
           return SliverPadding(

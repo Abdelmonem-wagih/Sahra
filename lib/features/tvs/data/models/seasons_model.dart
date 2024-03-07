@@ -6,7 +6,7 @@ class SeasonsModel extends Seasons {
     required super.seasonNumber,
     required super.episodeCount,
     required super.airDate,
-    required super.posterPath,
+    required super.name,
   });
 
   factory SeasonsModel.fromJson(Map<String, dynamic> json) => SeasonsModel(
@@ -14,6 +14,6 @@ class SeasonsModel extends Seasons {
         seasonNumber: json['season_number'],
         episodeCount: json['episode_count'],
         airDate: json['air_date'],
-        posterPath: json['"poster_path'],
+        name: json['name'],
       );
 }
