@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:sahar/expend_cubit.dart';
 import 'package:sahar/features/movies/data/data_source/movie_remote_data_source.dart';
 import 'package:sahar/features/movies/data/repository/movies_repository.dart';
 import 'package:sahar/features/movies/domain/repository/base_movies_repository.dart';
@@ -14,7 +15,9 @@ import 'package:sahar/features/movies/presentation/cubit/now_playing_movies/now_
 import 'package:sahar/features/movies/presentation/cubit/popular_movies/popular_movies_cubit.dart';
 import 'package:sahar/features/movies/presentation/cubit/recommendation/recommendation_cubit.dart';
 import 'package:sahar/features/movies/presentation/cubit/toprated_movies/top_rated_movies_cubit.dart';
+import 'package:sahar/features/tvs/domain/usecase/get_episodes_usecase.dart';
 import 'package:sahar/features/tvs/domain/usecase/get_on_the_air_tv_usecase.dart';
+import 'package:sahar/features/tvs/presentation/cubit/episodes/episodes_cubit.dart';
 import 'package:sahar/features/tvs/presentation/cubit/on_the_air/on_the_air_cubit.dart';
 import 'package:sahar/features/tvs/presentation/cubit/tvs_details/tvs_details_cubit.dart';
 
@@ -29,30 +32,31 @@ import '../../features/tvs/presentation/cubit/popular_tvs/popular_tvs_cubit.dart
 import '../../features/tvs/presentation/cubit/recommendation_tvs/recommendation_tvs_cubit.dart';
 import '../../features/tvs/presentation/cubit/toprated_tvs/top_rated_tvs_cubit.dart';
 
-
 GetIt sl = GetIt.instance;
 
 Future<void> init() async {
-
   ///////////////////////////////// Cubit /////////////////////////////////
-                      ///Movie Cubit///
+  
+  sl.registerLazySingleton(() => ExpandCubit());
+
+  ///Movie Cubit///
   sl.registerLazySingleton(() => NowPlayingMoviesCubit(sl()));
   sl.registerLazySingleton(() => PopularMoviesCubit(sl()));
   sl.registerLazySingleton(() => TopRatedMoviesCubit(sl()));
   sl.registerLazySingleton(() => MoviesDetailsCubit(sl()));
   sl.registerLazySingleton(() => RecommendationCubit(sl()));
-   sl.registerLazySingleton(() => MovieVideosCubit(sl()));
+  sl.registerLazySingleton(() => MovieVideosCubit(sl()));
 
-                       ///TVs Cubit///
+  ///TVs Cubit///
   sl.registerLazySingleton(() => OnTheAirCubit(sl()));
   sl.registerLazySingleton(() => PopularTVsCubit(sl()));
   sl.registerLazySingleton(() => TopRatedTVsCubit(sl()));
   sl.registerLazySingleton(() => TVsDetailsCubit(sl()));
   sl.registerLazySingleton(() => RecommendationTVsCubit(sl()));
-
+  sl.registerLazySingleton(() => EpisodesCubit(sl()));
 
   //////////////////////////////// UseCase ////////////////////////////////
-                     ///Movie UseCase///
+  ///Movie UseCase///
   sl.registerLazySingleton(() => GetNowPlayingMoviesUseCase(sl()));
   sl.registerLazySingleton(() => GetPopularMoviesUseCase(sl()));
   sl.registerLazySingleton(() => GetTopRatedMoviesUseCase(sl()));
@@ -60,12 +64,13 @@ Future<void> init() async {
   sl.registerLazySingleton(() => GetRecommendationUseCase(sl()));
   sl.registerLazySingleton(() => GetMovieVideosUseCase(sl()));
 
-                       ///TVs UseCase///
+  ///TVs UseCase///
   sl.registerLazySingleton(() => GetOnTheAirUseCase(sl()));
   sl.registerLazySingleton(() => GetPopularTVsUseCase(sl()));
   sl.registerLazySingleton(() => GetTopRatedTVsUseCase(sl()));
   sl.registerLazySingleton(() => GetTVsDetailsUseCase(sl()));
   sl.registerLazySingleton(() => GetRecommendationTVsUseCase(sl()));
+  sl.registerLazySingleton(() => GetEpisodesUseCase(sl()));
 
   //here we went to add baseMovieRemoteDatasource
   //but now we use SingleTon for create a simple code
@@ -74,9 +79,8 @@ Future<void> init() async {
   sl.registerLazySingleton<BaseMoviesRepository>(() => MoviesRepository(sl()));
   sl.registerLazySingleton<BaseTVsRepository>(() => TVsRepository(sl()));
 
-
   sl.registerLazySingleton<BaseMovieRemoteDatasource>(
-          () => MovieRemoteDataSource());
+      () => MovieRemoteDataSource());
   sl.registerLazySingleton<BaseTVsRemoteDataSource>(
-          () => TVsRemoteDataSource());
+      () => TVsRemoteDataSource());
 }

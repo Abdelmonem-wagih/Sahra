@@ -52,8 +52,8 @@ dependencies:
 flutter_native_splash:
   android: true
   ios: true
-  color: '#000000'
-  image: 'assets/icon_launcher/icon_launcher.png'
+  color: '#9F0202'
+  image:  'assets\icon_launcher\spalsh_launcher.png'
 
 
 
@@ -66,7 +66,8 @@ flutter_launcher_icons:
   image_path: 'assets/icon_launcher/icon_launcher.png'
   android: true
   ios: true
-  background_color: '#000000'
+  adaptive_icon_background: '#ffffff'
+  adaptive_icon_foreground: 'assets/icon_launcher/ic_launcher.png'
 
 
   flutter_lints: ^3.0.0

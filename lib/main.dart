@@ -11,6 +11,7 @@ import 'package:sahar/features/movies/presentation/cubit/now_playing_movies/now_
 import 'package:sahar/features/movies/presentation/cubit/popular_movies/popular_movies_cubit.dart';
 import 'package:sahar/features/movies/presentation/cubit/recommendation/recommendation_cubit.dart';
 import 'package:sahar/features/movies/presentation/cubit/toprated_movies/top_rated_movies_cubit.dart';
+import 'package:sahar/features/tvs/presentation/cubit/episodes/episodes_cubit.dart';
 import 'package:sahar/features/tvs/presentation/cubit/on_the_air/on_the_air_cubit.dart';
 
 import 'features/tvs/presentation/cubit/popular_tvs/popular_tvs_cubit.dart';
@@ -80,6 +81,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<RecommendationTVsCubit>(
           create: (context) => di.sl<RecommendationTVsCubit>(),
+        ),
+         BlocProvider<EpisodesCubit>(
+          create: (context) => di.sl<EpisodesCubit>(),
         ),
       ],
       child: MaterialApp(

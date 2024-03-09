@@ -8,17 +8,14 @@ import 'package:sahar/features/tvs/domain/usecase/get_episodes_usecase.dart';
 import 'package:sahar/features/tvs/domain/usecase/get_recommendation_tv_usecase.dart';
 import 'package:sahar/features/tvs/domain/usecase/get_tv_details_usecase.dart';
 
-
-
 abstract class BaseTVsRepository {
-
   Future<Either<Failure, List<TV>>> getOnTheAir();
   Future<Either<Failure, List<TV>>> getPopularTVs();
   Future<Either<Failure, List<TV>>> getTopRatedTVs();
-  Future<Either<Failure , TVsDetail>> getTVsDetails(TVsDetailsParameter parameter);
+  Future<Either<Failure, TVsDetail>> getTVsDetails(
+      TVsDetailsParameter parameter);
   Future<Either<Failure, List<RecommendationTV>>> getRecommendation(
-      RecommendationTVsParameters parameters
-      );
-  Future<Either <Failure , List<Episodes>>> getEpisodes(EpisodesParameters pramater);
-
+      RecommendationTVsParameters parameters);
+  Future<Either<Failure, List<Episodes>>> getEpisodes(
+      EpisodesParameters pramater);
 }

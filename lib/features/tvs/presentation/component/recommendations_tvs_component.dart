@@ -18,87 +18,65 @@ class RecommendationsTVsComponent extends StatelessWidget {
     return BlocBuilder<RecommendationTVsCubit, RecommendationTVsState>(
       builder: (context, state) {
         if (state is RecommendationTVsInitial) {
-          return const SliverPadding(
-            padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 24.0),
-            sliver: SliverToBoxAdapter(
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            ),
+           return const Center(
+            child: CircularProgressIndicator(),
           );
         } else if (state is RecommendationTVsLoaded) {
-          return SliverPadding(
-            padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 24.0),
-            sliver: SliverGrid(
-              delegate: SliverChildBuilderDelegate(
-                childCount: state.recommendation.length,
-                    (context, index) {
-                  final recommendation = state.recommendation[index];
-                  return FadeInUp(
-                    from: 20,
-                    duration: const Duration(milliseconds: 500),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                TVsDetailScreen(id: recommendation.id),
-                          ),
-                        );
-                      },
-                      child: ClipRRect(
-                        borderRadius:
-                        const BorderRadius.all(Radius.circular(4.0)),
-                        child: CachedNetworkImage(
-                          imageUrl: AppConstance.imageUrl(
-                              recommendation.backdropPath!),
-                          placeholder: (context, url) => Shimmer.fromColors(
-                            baseColor: Colors.grey[850]!,
-                            highlightColor: Colors.grey[800]!,
-                            child: Container(
-                              height: 170.0,
-                              width: 120.0,
-                              decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
-                            ),
-                          ),
-                          errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
-                          height: 180.0,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  );
-                },
-                // childCount: recommendationDummy.length,
-              ),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisSpacing: 8.0,
-                crossAxisSpacing: 8.0,
-                childAspectRatio: 0.7,
-                crossAxisCount: 3,
-              ),
+         return GridView.builder(
+            itemCount: state.recommendation.length,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              mainAxisSpacing: 8.0,
+              crossAxisSpacing: 8.0,
+              childAspectRatio: 0.7,
+              crossAxisCount: 3,
             ),
-          );
-        } else {
-          return SliverPadding(
-            padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 24.0),
-            sliver: SliverToBoxAdapter(
-              child: FadeInUp(
+            itemBuilder: (context, index) {
+              final recommendation = state.recommendation[index];
+              return FadeInRight(
                 from: 20,
                 duration: const Duration(milliseconds: 500),
-                child: const Text(
-                  'Errrrrrrrrrrror Recommendation',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w500,
-                    letterSpacing: 1.2,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TVsDetailScreen(id: recommendation.id),
+                      ),
+                    );
+                  },
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(4.0),
+                    child: CachedNetworkImage(
+                      imageUrl: AppConstance.imageUrl(recommendation.backdropPath!),
+                      placeholder: (context, url) => Shimmer.fromColors(
+                        baseColor: Colors.grey[850]!,
+                        highlightColor: Colors.grey[800]!,
+                        child: Container(
+                          height: 170.0,
+                          width: 120.0,
+                          decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => const Icon(Icons.error),
+                      height: 180.0,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
+              );
+            },
+          );
+        } else {
+          return const Center(
+            child: Text(
+              'Error Loading Recommendations',
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 1.2,
               ),
             ),
           );
@@ -107,3 +85,6 @@ class RecommendationsTVsComponent extends StatelessWidget {
     );
   }
 }
+
+
+

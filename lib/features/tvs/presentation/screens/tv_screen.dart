@@ -7,6 +7,7 @@ import 'package:sahar/features/tvs/presentation/component/popular_tvs_component.
 import 'package:sahar/features/tvs/presentation/component/top_rated_tv_component.dart';
 import 'package:sahar/features/tvs/presentation/widget/popular_tvs_bottom_sheet.dart';
 import 'package:sahar/features/tvs/presentation/widget/top_rated_tvs_bottom_sheet.dart';
+import 'package:sahar/test_tab_bar.dart';
 
 class TVsScreen extends StatelessWidget {
   const TVsScreen({Key? key}) : super(key: key);
@@ -52,7 +53,9 @@ class TVsScreen extends StatelessWidget {
                     ),
                   ),
                   InkWell(
-                    onTap: () => showSheet(true),
+                    onTap: () => 
+                    //Navigator.of(context).push(MaterialPageRoute(builder: (context) => CartPage(),)),
+                    showSheet(true),
                     child: const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Row(

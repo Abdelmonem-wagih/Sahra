@@ -1,10 +1,26 @@
 part of 'episodes_cubit.dart';
 
-sealed class EpisodesState extends Equatable {
+abstract class EpisodesState extends Equatable {
   const EpisodesState();
 
   @override
   List<Object> get props => [];
 }
 
-final class EpisodesInitial extends EpisodesState {}
+ class EpisodesInitial extends EpisodesState {}
+
+class EpisodesLoaded extends EpisodesState {
+  final List<Episodes> episodes;
+  const EpisodesLoaded({required this.episodes});
+
+  @override
+  List<Object> get props => [episodes];
+}
+
+class EpisodesFailure extends EpisodesState {
+  final String episodesMessage;
+  const EpisodesFailure({required this.episodesMessage});
+
+  @override
+  List<Object> get props => [episodesMessage];
+}
