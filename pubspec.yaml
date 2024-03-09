@@ -51,8 +51,6 @@ dev_dependencies:
   flutter_svg: ^2.0.10+1
   shimmer: ^2.0.0
   bottom_sheet: ^4.0.0
-  cupertino_icons: ^1.0.2
-
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
