@@ -17,10 +17,10 @@ class NowPlayingLoaded extends NowPlayingState {
   List<Object> get props => [nowPlayingMovies];
 }
 
-class Moviesfailure extends NowPlayingState {
+class NowPlayingfailure extends NowPlayingState {
   final String nowPlayingMessage;
 
-  const Moviesfailure({
+  const NowPlayingfailure({
     required this.nowPlayingMessage,
   });
 

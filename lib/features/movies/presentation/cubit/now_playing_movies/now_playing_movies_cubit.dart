@@ -23,7 +23,7 @@ class NowPlayingMoviesCubit extends Cubit<NowPlayingState> {
 
     response.fold(
           (failure) => emit(
-        const Moviesfailure(
+        const NowPlayingfailure(
           nowPlayingMessage: 'can not fetch Now Playing Message',
         ),
       ),

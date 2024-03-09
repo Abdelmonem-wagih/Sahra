@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahar/core/unit/app_constance.dart';
 import 'package:sahar/core/unit/app_string.dart';
+import 'package:sahar/features/movies/presentation/component/movie_videos_component.dart';
 import 'package:sahar/features/movies/presentation/component/recommendations_component.dart';
 import 'package:sahar/features/movies/presentation/cubit/movie_details/movies_details_cubit.dart';
-import 'package:sahar/features/movies/presentation/screens/movies_screen.dart';
+import 'package:sahar/home_screen.dart';
 import '../../domain/entities/genres.dart';
+import '../cubit/movie_videos/movie_videos_cubit.dart';
 
 class MovieDetailScreen extends StatelessWidget {
   final int id;
@@ -17,6 +19,8 @@ class MovieDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<MoviesDetailsCubit>().fetchMoviesDetails(id);
+    context.read<MovieVideosCubit>().getMovieVideos(id);
+
     return Scaffold(
       body: BlocBuilder<MoviesDetailsCubit, MoviesDetailsState>(
         builder: (context, state) {
@@ -33,7 +37,10 @@ class MovieDetailScreen extends StatelessWidget {
                     icon: const Icon(Icons.arrow_back_ios_new_rounded),
                     onPressed: () => Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => const MoviesScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => HomeScreen(
+                                currentPageIndex: 0,
+                              )),
                     ),
                   ),
                   pinned: true,
@@ -94,8 +101,7 @@ class MovieDetailScreen extends StatelessWidget {
                                   horizontal: 8.0,
                                 ),
                                 decoration: BoxDecoration(
-                                  color:
-                                  const Color.fromARGB(255, 230, 126, 126),
+                                  color: Colors.white38,
                                   borderRadius: BorderRadius.circular(4.0),
                                 ),
                                 child: Text(
@@ -178,7 +184,7 @@ class MovieDetailScreen extends StatelessWidget {
                       from: 20,
                       duration: const Duration(milliseconds: 500),
                       child: const Text(
-                        AppString.moreLikeThis,
+                        'Tailler',
                         style: TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.w500,
@@ -189,9 +195,56 @@ class MovieDetailScreen extends StatelessWidget {
                   ),
                 ),
                 // Tab(text: 'More like this'.toUpperCase()),
-                RecommendationsComponent(
-                  recommendationId: id,
-                )
+                MovieVideosComponent(
+                  movieId: id,
+                ),
+                SliverPadding(
+                  padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 24.0),
+                  sliver: SliverToBoxAdapter(
+                    child: FadeInUp(
+                      from: 20,
+                      duration: const Duration(milliseconds: 500),
+                      child: const Text(
+                        AppString.moreLikeThis,
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500,
+                          letterSpacing: 1.2,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                // SliverToBoxAdapter(
+                //   child: TabBar(
+                //     labelColor: Colors.white,
+                //     dividerColor: Colors.transparent,
+                //     indicatorSize: TabBarIndicatorSize.tab,
+                //     indicator: BoxDecoration(
+                //       border: Border(
+                //         bottom: BorderSide(
+                //           color: const Color.fromARGB(
+                //               255, 230, 126, 126), // Color of the indicator
+                //           width: 3.0, // Thickness of the indicator
+                //         ),
+                //       ),
+                //     ),
+                //     tabs: [
+                //       Tab(text: ' EPISODES      '),
+                //       Tab(text: AppString.moreLikeThis),
+                //     ],
+                //   ),
+                // ),
+              RecommendationsComponent(recommendationId: id),
+                
+                // SliverFillRemaining(
+                //   child: TabBarView(
+                //     children: [
+                //       RecommendationsComponent(recommendationId: id),
+                //       RecommendationsComponent(recommendationId: id),
+                //     ],
+                //   ),
+                // ),
               ],
             );
           } else {

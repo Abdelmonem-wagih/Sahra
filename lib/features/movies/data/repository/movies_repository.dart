@@ -3,10 +3,12 @@ import 'package:sahar/core/exception/exception.dart';
 import 'package:sahar/core/exception/failure.dart';
 import 'package:sahar/features/movies/data/data_source/movie_remote_data_source.dart';
 import 'package:sahar/features/movies/domain/entities/movie.dart';
+import 'package:sahar/features/movies/domain/entities/movie_videos.dart';
 import 'package:sahar/features/movies/domain/entities/movies_detail.dart';
 import 'package:sahar/features/movies/domain/entities/recommendation.dart';
 import 'package:sahar/features/movies/domain/repository/base_movies_repository.dart';
 import 'package:sahar/features/movies/domain/usecase/get_movie_details_usecase.dart';
+import 'package:sahar/features/movies/domain/usecase/get_movie_videos_usecase.dart';
 import 'package:sahar/features/movies/domain/usecase/get_recommendation_usecase.dart';
 
 
@@ -63,6 +65,16 @@ class MoviesRepository extends BaseMoviesRepository {
     try{
       return Right(result);
     }on ServerException catch(failure){
+      return Left(ServerFailure(failure.errorMessageModel.statusMessage));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<MovieVideos>>> getMovieVideos(MovieVideosParameter parameter) async{
+  final result = await baseMovieRemoteDatasource.getMovieVideos(parameter);
+  try {
+    return Right(result);
+  }on ServerException catch(failure){
       return Left(ServerFailure(failure.errorMessageModel.statusMessage));
     }
   }
