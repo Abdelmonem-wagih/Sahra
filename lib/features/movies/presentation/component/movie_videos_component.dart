@@ -2,7 +2,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahar/features/movies/presentation/cubit/movie_videos/movie_videos_cubit.dart';
-import 'package:sahar/features/movies/presentation/widget/youtube_player.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class MovieVideosComponent extends StatelessWidget {

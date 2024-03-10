@@ -7,7 +7,6 @@ import 'package:sahar/features/movies/presentation/component/top_rated_component
 import 'package:sahar/features/movies/presentation/widget/popular_bottom_sheet.dart';
 import 'package:sahar/features/movies/presentation/widget/top_rated_bottom_sheet.dart';
 
-import '../widget/youtube_player.dart';
 
 class MoviesScreen extends StatelessWidget {
   const MoviesScreen({Key? key}) : super(key: key);

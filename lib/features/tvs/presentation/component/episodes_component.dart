@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahar/features/tvs/domain/entities/seasons.dart';
-import 'package:sahar/features/tvs/presentation/cubit/episodes/episodes_cubit.dart';
 import 'package:sahar/order_widget.dart';
 
 class EpisodesComponent extends StatelessWidget {
@@ -28,7 +26,7 @@ class EpisodesComponent extends StatelessWidget {
           return ListView.builder(
             itemCount: numberOfSeasons,
             itemBuilder: (context, index1) {
-              return OrderItem(
+              return EpisodesItem(
                 seasons: seasons[index1],
                 seriesId: seriesId,
               );

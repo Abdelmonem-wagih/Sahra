@@ -3,13 +3,13 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sahar/core/unit/app_constance.dart';
-import 'package:sahar/expend_cubit.dart';
+import 'package:sahar/features/tvs/presentation/cubit/expend_cubit.dart';
 import 'package:sahar/features/tvs/domain/entities/seasons.dart';
 import 'package:sahar/features/tvs/presentation/cubit/episodes/episodes_cubit.dart';
 import 'package:shimmer/shimmer.dart';
 
-class OrderItem extends StatelessWidget {
-  OrderItem({required this.seasons, required this.seriesId});
+class EpisodesItem extends StatelessWidget {
+  EpisodesItem({required this.seasons, required this.seriesId});
   final Seasons seasons;
   final int seriesId;
   @override
